@@ -1,0 +1,92 @@
+﻿[
+  {
+    "id": 0,
+    "name": "Connect to DB",
+    "duration": 30000,
+    "priority": 1
+  },
+  {
+    "id": 1,
+    "name": "Load configuration",
+    "duration": 5000,
+    "priority": 2
+  },
+  {
+    "id": 2,
+    "name": "Initialize cache",
+    "duration": 8000,
+    "priority": 0
+  },
+  {
+    "id": 3,
+    "name": "Run migrations",
+    "duration": 10000,
+    "priority": 1
+  },
+  {
+    "id": 4,
+    "name": "Start HTTP server",
+    "duration": 3000,
+    "priority": 2
+  },
+  {
+    "id": 5,
+    "name": "Establish Redis connection",
+    "duration": 2000,
+    "priority": 0
+  },
+  {
+    "id": 6,
+    "name": "Register middleware",
+    "duration": 1000,
+    "priority": 1
+  },
+  {
+    "id": 7,
+    "name": "Warm up routes",
+    "duration": 4000,
+    "priority": 2
+  },
+  {
+    "id": 8,
+    "name": "Verify database schema",
+    "duration": 7000,
+    "priority": 0
+  },
+  {
+    "id": 9,
+    "name": "Start background workers",
+    "duration": 9000,
+    "priority": 1
+  },
+  {
+    "id": 10,
+    "name": "Subscribe to message queue",
+    "duration": 6000,
+    "priority": 2
+  },
+  {
+    "id": 11,
+    "name": "Load feature flags",
+    "duration": 3000,
+    "priority": 0
+  },
+  {
+    "id": 12,
+    "name": "Initialize metrics exporter",
+    "duration": 5000,
+    "priority": 1
+  },
+  {
+    "id": 13,
+    "name": "Prepare health checks",
+    "duration": 2000,
+    "priority": 2
+  },
+  {
+    "id": 14,
+    "name": "Accept incoming requests",
+    "duration": 10000,
+    "priority": 0
+  }
+]
