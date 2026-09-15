@@ -1,9 +1,6 @@
 ﻿using AsyncTaskScheduler;
-using System.Net.Http.Json;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
-var text = await File.ReadAllTextAsync("tasks.json");
 TaskItem[] array;
 using (var stream = File.OpenRead("tasks.json"))
 {
@@ -12,10 +9,9 @@ using (var stream = File.OpenRead("tasks.json"))
 using (var cts = new CancellationTokenSource())
 using (var semaphore = new SemaphoreSlim(3))
 {
-    var tasks = array.Select(async i =>
+    var taskList = array.Select(async i =>
     {
         await semaphore.WaitAsync(cts.Token);
-        if (cts.Token.IsCancellationRequested) return;
         try
         {
             Console.WriteLine($"{DateTime.Now:HH:mm:ss.ff} [START]    {i.Name}");
@@ -32,7 +28,7 @@ using (var semaphore = new SemaphoreSlim(3))
             semaphore.Release();
         }
     });
-    var workTask = Task.WhenAll(tasks);
+    var workTask = Task.WhenAll(taskList);
     var cancelTask = Task.Run(async () =>
     {
         while (!Console.KeyAvailable && !workTask.IsCompleted)
@@ -52,6 +48,6 @@ using (var semaphore = new SemaphoreSlim(3))
     }
     catch (OperationCanceledException)
     {
-        Console.WriteLine($"{DateTime.Now:HH:mm:ss.ff} [SHOTDOWN] Stopped by user");
+        Console.WriteLine($"{DateTime.Now:HH:mm:ss.ff} [SHUTDOWN] Stopped by user");
     }
 }
