@@ -1,4 +1,5 @@
 ﻿using AsyncTaskScheduler;
+using AsyncTaskScheduler.Logger;
 using System.Text.Json;
 
 TaskItem[] array;
@@ -6,6 +7,8 @@ using (var stream = File.OpenRead("tasks.json"))
 {
     array = await JsonSerializer.DeserializeAsync<TaskItem[]>(stream) ?? [];
 }
+var systemLogger = new ConsoleLogger<SystemStatus>(TimeProvider.System);
+var logger = new ConsoleLogger<TaskPhase>(TimeProvider.System);
 using (var cts = new CancellationTokenSource())
 using (var semaphore = new SemaphoreSlim(3))
 {
@@ -14,13 +17,13 @@ using (var semaphore = new SemaphoreSlim(3))
         await semaphore.WaitAsync(cts.Token);
         try
         {
-            Console.WriteLine($"{DateTime.Now:HH:mm:ss.ff} [START]    {i.Name}");
+            logger.Log(TaskPhase.Start, i.Name);
             await Task.Delay(i.DurationMs, cts.Token);
-            Console.WriteLine($"{DateTime.Now:HH:mm:ss.ff} [STOP]     {i.Name}");
+            logger.Log(TaskPhase.Stop, i.Name);
         }
         catch (OperationCanceledException)
         {
-            Console.WriteLine($"{DateTime.Now:HH:mm:ss.ff} [CANCEL]   {i.Name}");
+            logger.Log(TaskPhase.Cancel, i.Name);
             throw;
         }
         finally
@@ -48,6 +51,6 @@ using (var semaphore = new SemaphoreSlim(3))
     }
     catch (OperationCanceledException)
     {
-        Console.WriteLine($"{DateTime.Now:HH:mm:ss.ff} [SHUTDOWN] Stopped by user");
+        systemLogger.Log(SystemStatus.Shutdown, "Stopped by user");
     }
 }
