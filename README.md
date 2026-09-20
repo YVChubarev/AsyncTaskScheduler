@@ -21,3 +21,6 @@ dotnet run
 ### 1.2
 - Ожидание отмены вынесено в `ITrigger` / `KeyPressTrigger`
 - упрощение вызова **using**
+
+### 1.3
+- Процесс выполнения `TaskItem` вынесен в `ITaskItemExecutor` / `TaskItemExecutor`

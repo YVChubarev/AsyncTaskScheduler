@@ -16,14 +16,7 @@ var taskList = array.Select(async i =>
     await semaphore.WaitAsync(cts.Token);
     try
     {
-        logger.Log(TaskPhase.Start, i.Name);
-        await Task.Delay(i.DurationMs, cts.Token);
-        logger.Log(TaskPhase.Stop, i.Name);
-    }
-    catch (OperationCanceledException)
-    {
-        logger.Log(TaskPhase.Cancel, i.Name);
-        throw;
+        await new TaskItemExecutor(i, logger).ExecuteAsync(cts.Token);
     }
     finally
     {
