@@ -3,23 +3,15 @@
 namespace AsyncTaskScheduler
 {
     /// <summary>
-    /// Класс выполнения <see cref="TaskItem"/>
+    /// Класс выполнения <see cref="TaskItem"/>.
     /// </summary>
-    public class TaskItemExecutor : ITaskItemExecutor
+    /// <param name="taskItem">Задача, которую надо выполнить.</param>
+    /// <param name="logger">Логгер.</param>
+    public class TaskItemExecutor (TaskItem taskItem,
+                                   IStatusLogger < TaskPhase > logger) : ITaskItemExecutor
     {
-        private readonly TaskItem _taskItem;
-        private readonly IStatusLogger<TaskPhase> _logger;
-
-        /// <summary>
-        /// Класс выполнения <see cref="TaskItem"/>
-        /// </summary>
-        /// <param name="taskItem">Задача, которую надо выполнить.</param>
-        /// <param name="logger">Логгер.</param>
-        public TaskItemExecutor(TaskItem taskItem, IStatusLogger<TaskPhase> logger)
-        {
-            _taskItem = taskItem;
-            _logger = logger;
-        }
+        private readonly TaskItem _taskItem = taskItem;
+        private readonly IStatusLogger<TaskPhase> _logger = logger;
 
         /// <inheritdoc/>
         public async Task ExecuteAsync(CancellationToken token)

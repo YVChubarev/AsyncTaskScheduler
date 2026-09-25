@@ -1,20 +1,20 @@
 ﻿namespace AsyncTaskScheduler.Logger
 {
     /// <summary>
-    /// Статусы выполнения задачи
+    /// Статусы выполнения задачи.
     /// </summary>
     public enum TaskPhase
     {
         /// <summary>
-        /// Задача запущена
+        /// Задача запущена.
         /// </summary>
         Start,
         /// <summary>
-        /// Задача завершена
+        /// Задача завершена.
         /// </summary>
         Stop,
         /// <summary>
-        /// Задача прервана
+        /// Задача прервана.
         /// </summary>
         Cancel,
     }

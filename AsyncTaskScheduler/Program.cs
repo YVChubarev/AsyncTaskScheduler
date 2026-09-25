@@ -7,8 +7,9 @@ using (var stream = File.OpenRead("tasks.json"))
 {
     array = await JsonSerializer.DeserializeAsync<TaskItem[]>(stream) ?? [];
 }
-var systemLogger = new ConsoleLogger<SystemStatus>(TimeProvider.System);
-var logger = new ConsoleLogger<TaskPhase>(TimeProvider.System);
+var writer = Console.Out;
+var systemLogger = new StatusLogger<SystemStatus>(TimeProvider.System, writer);
+var logger = new StatusLogger<TaskPhase>(TimeProvider.System, writer);
 
 var orchestrator = new TaskItemsOrchestrator(
     item => new TaskItemExecutor(item, logger),
