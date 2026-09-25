@@ -9,6 +9,19 @@ dotnet run
 ## Стек
 .NET 10, C#, System.Text.Json, async/await
 
+## Архитектура
+
+Рефакторинг по SOLID:
+
+- **SRP** — каждая ответственность в своём классе:
+  `ConsoleLogger`, `TaskItemExecutor`, `TaskItemsOrchestrator`, `KeyPressTrigger`.
+- **DIP** — зависимости через абстракции:
+  `IStatusLogger<T>`, `ITaskItemExecutor`, `ITrigger`, `TimeProvider`.
+- **ISP** — `IStatusLogger<TaskPhase>` и `IStatusLogger<SystemStatus>` разделены по клиентам.
+- **OCP** — новые статусы/триггеры/логгеры добавляются без правки существующих классов.
+
+Composition root — `Program.cs`. Все зависимости собираются в одном месте.
+
 ## Changelog
 
 ### 1.1
@@ -24,3 +37,6 @@ dotnet run
 
 ### 1.3
 - Процесс выполнения `TaskItem` вынесен в `ITaskItemExecutor` / `TaskItemExecutor`
+
+### 1.4
+- Процесс параллельного выполнения `TaskItem[]` вынесен в `TaskItemsOrchestrator`

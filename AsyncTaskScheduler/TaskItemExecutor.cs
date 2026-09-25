@@ -14,14 +14,14 @@ namespace AsyncTaskScheduler
         /// Класс выполнения <see cref="TaskItem"/>
         /// </summary>
         /// <param name="taskItem">Задача, которую надо выполнить.</param>
-        /// <param name="logger">Логгер. Необязательный параметр.</param>
+        /// <param name="logger">Логгер.</param>
         public TaskItemExecutor(TaskItem taskItem, IStatusLogger<TaskPhase> logger)
         {
             _taskItem = taskItem;
             _logger = logger;
         }
 
-        ///<inheritdoc/>
+        /// <inheritdoc/>
         public async Task ExecuteAsync(CancellationToken token)
         {
             try

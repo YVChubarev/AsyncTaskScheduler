@@ -5,7 +5,7 @@
     /// </summary>
     public class KeyPressTrigger : ITrigger
     {
-        ///<inheritdoc/>
+        /// <inheritdoc/>
         public async Task WaitAsync(CancellationToken token = default)
         {
             while (!Console.KeyAvailable)
