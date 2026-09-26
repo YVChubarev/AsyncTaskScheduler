@@ -7,8 +7,8 @@ namespace AsyncTaskScheduler
     /// </summary>
     /// <param name="taskItem">Задача, которую надо выполнить.</param>
     /// <param name="logger">Логгер.</param>
-    public class TaskItemExecutor (TaskItem taskItem,
-                                   IStatusLogger < TaskPhase > logger) : ITaskItemExecutor
+    public class TaskItemExecutor(TaskItem taskItem,
+                                  IStatusLogger<TaskPhase> logger) : ITaskItemExecutor
     {
         private readonly TaskItem _taskItem = taskItem;
         private readonly IStatusLogger<TaskPhase> _logger = logger;

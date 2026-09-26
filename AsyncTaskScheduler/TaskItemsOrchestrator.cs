@@ -21,8 +21,8 @@ namespace AsyncTaskScheduler
         /// <param name="maxParallelism">Уровень параллелизма.</param>
         public async Task RunAsync(TaskItem[] items, int maxParallelism)
         {
-            using var cts = new CancellationTokenSource();
-            using var semaphore = new SemaphoreSlim(maxParallelism);
+            using CancellationTokenSource cts = new();
+            using SemaphoreSlim semaphore = new(maxParallelism);
             var workTask = ExecuteAllAsync(items, semaphore, cts.Token);
             var triggerTask = trigger.WaitAsync(cts.Token);
             await Task.WhenAny(workTask, triggerTask);
