@@ -1,4 +1,6 @@
 ## AsyncTaskScheduler
+![CI](https://github.com/YVChubarev/AsyncTaskScheduler/actions/workflows/ci.yml/badge.svg)
+
 Консольное приложение для асинхронного выполнения задач с ограничением параллелизма.
 ## Что делает
 - Читает задачи из `tasks.json`
